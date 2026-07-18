@@ -72,27 +72,68 @@ h1{
   text-align:justify;
 }
 
-/* ---------- Slider (bow marker) ---------- */
+/* ---------- Slider (estilo igual à barra de resultado) ---------- */
 .pretty-slider{
   position:relative;
-  padding:18px 22px 26px;
+  padding:6px 0 34px;
   touch-action:none;
 }
-.pretty-slider .track-line{
+.pretty-slider .track{
   position:relative;
-  height:1.5px;
-  background:var(--line);
+  height:8px;
+  border-radius:4px;
+  background:linear-gradient(90deg, var(--gold), var(--wine));
 }
-.pretty-slider .end-dot{
+.pretty-slider .step-dot{
   position:absolute;
   top:50%;
   width:6px;
   height:6px;
   border-radius:50%;
+  background:rgba(0,0,0,0.35);
   transform:translate(-50%,-50%);
+  pointer-events:none;
 }
-.pretty-slider .end-dot.neg{left:0; background:var(--gold);}
-.pretty-slider .end-dot.pos{left:100%; background:var(--wine);}
+.pretty-slider .end-label{
+  position:absolute;
+  top:20px;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  color:var(--lilac);
+  white-space:nowrap;
+}
+.pretty-slider .end-label.neg{left:0;}
+.pretty-slider .end-label.pos{right:0;}
+.pretty-slider .neutral-label{
+  position:absolute;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  color:var(--lilac);
+  white-space:nowrap;
+}
+
+.bow-thumb{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:18px;
+  height:18px;
+  margin-left:-9px;
+  margin-top:-9px;
+  background:var(--cream);
+  border-radius:50%;
+  border:2px solid var(--ink);
+  box-shadow:0 0 0 1px var(--line);
+  padding:0;
+  cursor:grab;
+  transition:left .18s ease, transform .1s ease;
+}
+.bow-thumb:active{cursor:grabbing; transform:scale(1.08);}
 
 .pretty-slider .end-label{
   position:absolute;
@@ -106,42 +147,9 @@ h1{
 .pretty-slider .end-label.neg{left:0;}
 .pretty-slider .end-label.pos{right:0;}
 
-.bow-thumb{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:42px;
-  height:30px;
-  margin-left:-21px;
-  margin-top:-14px;
-  background:none;
-  border:none;
-  padding:0;
-  cursor:grab;
-  transition:left .18s ease, transform .1s ease;
-}
-.bow-thumb:active{cursor:grabbing; transform:scale(1.08);}
-.bow-thumb svg{
-  width:100%;
-  height:100%;
-  overflow:visible;
-}
-.bow-thumb path,
-.bow-thumb circle{
-  fill:none;
-  stroke:currentColor;
-  stroke-width:3.4;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  transition:color .12s linear;
-}
-
 .divider{
-  display:flex;
-  justify-content:center;
   padding:10px 0;
 }
-.divider svg{display:block; width:100%; max-width:420px; height:32px;}
 
 .compass{
   position:sticky;
@@ -228,18 +236,7 @@ footer{
   <p class="subtitle">Criamos um teste simplificado que avalia três características gerais: como é a sua atitude ao lidar com o fetiche, qual é o foco do seu prazer e como lida com a humilhação erótica. A combinação desses elementos revela o seu perfil atual.</p>
   <p class="subtitle">Faça o teste e descubra qual é o seu!</p>
 
-  <div class="divider" aria-hidden="true">
-    <svg viewBox="0 0 600 40" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 0 20 Q 60 5 120 20 T 240 20 T 280 20" stroke="#D6203F" stroke-width="1" fill="none" opacity="0.6"/>
-      <path d="M 600 20 Q 540 5 480 20 T 360 20 T 320 20" stroke="#D6203F" stroke-width="1" fill="none" opacity="0.6"/>
-      <g transform="translate(300,20)">
-        <ellipse cx="-9" cy="-3" rx="6" ry="3.5" fill="#D6203F" opacity="0.8" transform="rotate(-25 -9 -3)"/>
-        <ellipse cx="9" cy="-3" rx="6" ry="3.5" fill="#D6203F" opacity="0.8" transform="rotate(25 9 -3)"/>
-        <ellipse cx="0" cy="4" rx="6" ry="4" fill="#D6203F" opacity="0.8"/>
-        <circle cx="0" cy="0" r="3" fill="#FF8FC7"/>
-      </g>
-    </svg>
-  </div>
+  <div class="divider" aria-hidden="true"></div>
 
   <!-- EIXO 1 -->
   <div class="axis-block" data-axis="1">
@@ -265,18 +262,7 @@ footer{
     </div>
   </div>
 
-  <div class="divider" aria-hidden="true">
-    <svg viewBox="0 0 600 40" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 0 20 Q 60 5 120 20 T 240 20 T 280 20" stroke="#D6203F" stroke-width="1" fill="none" opacity="0.6"/>
-      <path d="M 600 20 Q 540 5 480 20 T 360 20 T 320 20" stroke="#D6203F" stroke-width="1" fill="none" opacity="0.6"/>
-      <g transform="translate(300,20)">
-        <ellipse cx="-9" cy="-3" rx="6" ry="3.5" fill="#D6203F" opacity="0.8" transform="rotate(-25 -9 -3)"/>
-        <ellipse cx="9" cy="-3" rx="6" ry="3.5" fill="#D6203F" opacity="0.8" transform="rotate(25 9 -3)"/>
-        <ellipse cx="0" cy="4" rx="6" ry="4" fill="#D6203F" opacity="0.8"/>
-        <circle cx="0" cy="0" r="3" fill="#FF8FC7"/>
-      </g>
-    </svg>
-  </div>
+  <div class="divider" aria-hidden="true"></div>
 
   <!-- EIXO 2 -->
   <div class="axis-block" data-axis="2">
@@ -302,18 +288,7 @@ footer{
     </div>
   </div>
 
-  <div class="divider" aria-hidden="true">
-    <svg viewBox="0 0 600 40" xmlns="http://www.w3.org/2000/svg">
-      <path d="M 0 20 Q 60 5 120 20 T 240 20 T 280 20" stroke="#D6203F" stroke-width="1" fill="none" opacity="0.6"/>
-      <path d="M 600 20 Q 540 5 480 20 T 360 20 T 320 20" stroke="#D6203F" stroke-width="1" fill="none" opacity="0.6"/>
-      <g transform="translate(300,20)">
-        <ellipse cx="-9" cy="-3" rx="6" ry="3.5" fill="#D6203F" opacity="0.8" transform="rotate(-25 -9 -3)"/>
-        <ellipse cx="9" cy="-3" rx="6" ry="3.5" fill="#D6203F" opacity="0.8" transform="rotate(25 9 -3)"/>
-        <ellipse cx="0" cy="4" rx="6" ry="4" fill="#D6203F" opacity="0.8"/>
-        <circle cx="0" cy="0" r="3" fill="#FF8FC7"/>
-      </g>
-    </svg>
-  </div>
+  <div class="divider" aria-hidden="true"></div>
 
   <!-- EIXO 3 -->
   <div class="axis-block" data-axis="3">
@@ -345,19 +320,16 @@ footer{
     <div class="gauge" data-axis-gauge="1">
       <div class="gauge-labels"><span>Controladora</span><span>Submissa</span></div>
       <div class="gauge-track"><div class="gauge-marker"></div></div>
-      <div class="gauge-score">0 / ±5</div>
     </div>
 
     <div class="gauge" data-axis-gauge="2">
       <div class="gauge-labels"><span>Sexual</span><span>Romântica</span></div>
       <div class="gauge-track"><div class="gauge-marker"></div></div>
-      <div class="gauge-score">0 / ±5</div>
     </div>
 
     <div class="gauge" data-axis-gauge="3">
       <div class="gauge-labels"><span>Sem humilhação</span><span>Com humilhação</span></div>
       <div class="gauge-track"><div class="gauge-marker"></div></div>
-      <div class="gauge-score">0 / ±5</div>
     </div>
 
     <div class="result">
@@ -370,37 +342,27 @@ footer{
 </div>
 
 <script>
-const MIN = -3, MAX = 3, STEPS = 7; // -3..3
-const PINK = [255,143,199];  // #FF8FC7 (esquerda / discordo)
-const BORDO = [214,32,63];   // #D6203F (direita / concordo)
-
-const BOW_SVG = `
-<svg viewBox="-46 -26 92 62" xmlns="http://www.w3.org/2000/svg">
-  <path d="M0,-2 C-8,-18 -28,-22 -36,-10 C-44,2 -34,16 -16,13 C-8,11 -2,4 0,-2 Z"/>
-  <path d="M0,-2 C8,-18 28,-22 36,-10 C44,2 34,16 16,13 C8,11 2,4 0,-2 Z"/>
-  <circle cx="0" cy="-2" r="6"/>
-  <path d="M-6,10 C-16,16 -8,26 -18,32"/>
-  <path d="M6,10 C16,16 8,26 18,32"/>
-</svg>`;
-
-function lerpColor(a, b, t){
-  const c = a.map((v,i)=>Math.round(v + (b[i]-v)*t));
-  return `rgb(${c[0]},${c[1]},${c[2]})`;
-}
+const MIN = -3, MAX = 3;
 
 function buildSlider(container){
+  const steps = MAX - MIN; // 6 intervals -> 7 stops
+  let dots = '';
+  for(let i=0;i<=steps;i++){
+    const t = i/steps;
+    dots += `<span class="step-dot" style="left:${t*100}%"></span>`;
+  }
   container.innerHTML = `
-    <div class="track-line">
-      <span class="end-dot neg"></span>
-      <span class="end-dot pos"></span>
-      <button type="button" class="bow-thumb" aria-label="Arraste para responder">${BOW_SVG}</button>
+    <div class="track">
+      ${dots}
+      <button type="button" class="bow-thumb" aria-label="Arraste para responder"></button>
     </div>
     <span class="end-label neg">Discordo totalmente</span>
+    <span class="neutral-label">Neutro</span>
     <span class="end-label pos">Concordo totalmente</span>
   `;
   container.dataset.value = '0';
 
-  const track = container.querySelector('.track-line');
+  const track = container.querySelector('.track');
   const thumb = container.querySelector('.bow-thumb');
 
   function setValue(value, animate){
@@ -409,7 +371,6 @@ function buildSlider(container){
     const t = (value - MIN) / (MAX - MIN); // 0..1
     thumb.style.transition = animate ? 'left .18s ease' : 'none';
     thumb.style.left = (t * 100) + '%';
-    thumb.style.color = lerpColor(PINK, BORDO, t);
     container.dispatchEvent(new Event('sliderchange', {bubbles:true}));
   }
 
@@ -491,12 +452,10 @@ function updateUI(){
     const score = scores[axis];
     const gauge = document.querySelector(`[data-axis-gauge="${axis}"]`);
     const marker = gauge.querySelector('.gauge-marker');
-    const scoreLabel = gauge.querySelector('.gauge-score');
     const pct = (axis === '3')
       ? ((score + 5) / 10) * 100
       : 100 - (((score + 5) / 10) * 100);
     marker.style.left = pct + '%';
-    scoreLabel.textContent = `${score > 0 ? '+' : ''}${score} / ±5`;
   });
 
   const parts = [];
